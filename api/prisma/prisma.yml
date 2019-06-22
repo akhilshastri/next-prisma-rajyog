@@ -1,0 +1,21 @@
+# prisma end points to api
+
+endpoint: http://localhost:4466
+
+#prisma data model
+datamodel: datamodel.prisma
+
+databaseType: document
+
+generate:
+  - generator: typescript-client
+    output: ../src/gen/prisma-client/
+
+hooks:
+  post-deploy:
+    - prisma generate
+
+#seed initial data
+seed:
+  run: yarn ts-node ./prisma/seed.ts
+
